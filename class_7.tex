@@ -76,7 +76,8 @@ We use the notation $\Gamma, \phi$ to show $\Gamma \cup \{\phi\}$.
 \end{homework}
 
 \begin{example}
-  Show $(p \rightarrow q) \rightarrow (\neg q \rightarrow \neg p)$.
+  Show $(\phi \rightarrow \psi) \rightarrow 
+  (\neg \psi \rightarrow \neg \phi)$.
 \end{example}
 \begin{proof}
   \[ \infer* [right=$\rightarrow$-intro]
@@ -89,10 +90,10 @@ We use the notation $\Gamma, \phi$ to show $\Gamma \cup \{\phi\}$.
         }{\phi \rightarrow \psi, \neg \psi \vdash \neg \phi}
       }{(\phi \rightarrow \psi) 
         \vdash (\neg \psi \rightarrow \neg \phi)}
-    }{\vdash (p \rightarrow q) \rightarrow (\neg q \rightarrow \neg p)}
+    }{\vdash (\phi \rightarrow \psi) 
+      \rightarrow (\neg \psi \rightarrow \neg \phi)}
   \]
   Now we have two goals to prove. 
-  $\phi \rightarrow \psi, \neg \psi, \phi \vdash \psi$.
   \[ \infer* [right=$\rightarrow$-elim]
     { \infer* [right=ax]
       { }{\phi \rightarrow \psi, \neg \psi, \phi \vdash \phi} \\
