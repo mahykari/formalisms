@@ -106,4 +106,14 @@ We use the notation $\Gamma, \phi$ to show $\Gamma \cup \{\phi\}$.
     \qquad 
   \]
 \end{proof}
+
+The system defined above is in fact the NJ (Intuitionistic Natural 
+Deduction) system. The NK system (Classical Natural Deduction) is NJ,
+with the addition of the excluded-middle axiom:
+\[ \infer* [right=ex-middle]
+  { }{\Gamma \vdash \phi \lor \neg \phi}
+\]
+
+The NK system is sound and complete for propositional logic.
+
 }} % End localization of command definitions
