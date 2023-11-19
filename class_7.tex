@@ -1,0 +1,108 @@
+{{ % Localize command definitions
+
+\chapter{Class 7}
+
+For this chapter, we replace the word \emph{formula} in rules and 
+proofs of a formal system by the word \emph{judgement}.
+
+\section{Natural Deduction for Propositional Logic}
+
+Judgements in Natural Deduction have the form $\Gamma \vdash \phi$, 
+where $\Gamma$ is a set of formulas and $\varphi$ is a formula.
+Semantically, for all interpretations $v$, if all formulas in 
+$\Gamma$ are true in $v$, then $\phi$ is true in $v$.
+Formal system for natural deduction defines a meta-symbol 
+$\vdash_\text{meta}$ such that  $\vdash_\text{meta} (\Gamma \vdash 
+\phi)$. 
+
+\subsection{Judgements in Natural Deduction}
+
+We use the notation $\Gamma, \phi$ to show $\Gamma \cup \{\phi\}$. 
+
+\begin{enumerate}
+  \item Axioms
+  \[ \infer* [right=ax]
+    { }{\Gamma, \phi \vdash \phi}
+    \qquad\qquad \infer* [right=$\top$-intro]
+    { }{\Gamma \vdash \top}
+  \]
+  
+  \item False-elimination: if $\bot$ can be derived, then anything 
+  can be derived.
+  \[ \infer* [right=$\bot$-elim]
+    {\Gamma \vdash \bot}{\Gamma \vdash \phi}
+  \]
+
+  \item And-elimination and -introduction
+  \[ \infer* [right=$\land$-elim]
+    {\Gamma \vdash \phi \land \psi}{\Gamma \vdash \phi}
+    \qquad\qquad \infer* [right=$\land$-elim]
+    {\Gamma \vdash \phi \land \psi}{\Gamma \vdash \psi}
+    \qquad\qquad \infer* [right=$\land$-intro]
+    {\Gamma \vdash \phi \\ \Gamma \vdash \psi}
+    {\Gamma \vdash \phi \land \psi}
+  \]
+
+  \item Or-elimination and -introduction
+  \[ \infer* [right=$\lor$-elim]
+    {\Gamma \vdash \phi \lor \psi 
+    \\ \Gamma, \phi \vdash \chi
+    \\ \Gamma, \psi \vdash \chi}{\Gamma \vdash \chi}
+    \qquad\qquad \infer* [right=$\lor$-intro]
+    {\Gamma \vdash \phi}{\Gamma \vdash \phi \land \psi}
+    \qquad \infer* [right=$\land$-intro]
+    {\Gamma \vdash \phi}{\Gamma \vdash \psi \land \phi}
+  \]
+
+  \item Negation-elimination and -introduction
+  \[ \infer* [right=$\neg$-elim]
+    {\Gamma \vdash \phi \\ \Gamma \vdash \neg \phi}
+    {\Gamma \vdash \bot}
+    \qquad\qquad \infer* [right=$\neg$-intro]
+    {\Gamma, \phi \vdash \bot}{\Gamma \vdash \neg \phi}
+  \]
+  \item Implication-elimination and -introduction
+  \[ \infer* [right=$\rightarrow$-elim]
+    {\Gamma \vdash \phi \\ \Gamma \vdash \phi \rightarrow \psi}
+    {\Gamma \vdash \psi}
+    \qquad\qquad \infer* [right=$\rightarrow$-intro]
+    {\Gamma, \phi \vdash \psi}{\Gamma \vdash \phi \rightarrow \psi}
+  \]
+  Observe how $\rightarrow$-elim is similar to modus ponens.
+\end{enumerate}
+
+\begin{homework}
+  Prove implication transitivity using Natural Deduction.
+\end{homework}
+
+\begin{example}
+  Show $(p \rightarrow q) \rightarrow (\neg q \rightarrow \neg p)$.
+\end{example}
+\begin{proof}
+  \[ \infer* [right=$\rightarrow$-intro]
+    { \infer* [right=$\rightarrow$-intro]
+      { \infer* [right=$\neg$-intro]
+        { \infer* [right=$\neg$-elim]
+          { \phi \rightarrow \psi, \neg \psi, \phi \vdash \psi \\
+            \phi \rightarrow \psi, \neg \psi, \phi \vdash \neg \psi
+          }{\phi \rightarrow \psi, \neg \psi, \phi \vdash \bot}
+        }{\phi \rightarrow \psi, \neg \psi \vdash \neg \phi}
+      }{(\phi \rightarrow \psi) 
+        \vdash (\neg \psi \rightarrow \neg \phi)}
+    }{\vdash (p \rightarrow q) \rightarrow (\neg q \rightarrow \neg p)}
+  \]
+  Now we have two goals to prove. 
+  $\phi \rightarrow \psi, \neg \psi, \phi \vdash \psi$.
+  \[ \infer* [right=$\rightarrow$-elim]
+    { \infer* [right=ax]
+      { }{\phi \rightarrow \psi, \neg \psi, \phi \vdash \phi} \\
+      \infer* [right=ax]
+      { }{\phi \rightarrow \psi, \neg \psi, \phi 
+          \vdash \phi \rightarrow \psi}
+    }{\phi \rightarrow \psi, \neg \psi, \phi \vdash \psi}
+    \qquad \infer* [right=ax]
+      { }{\phi \rightarrow \psi, \neg \psi, \phi \vdash \neg \psi}
+    \qquad 
+  \]
+\end{proof}
+}} % End localization of command definitions
