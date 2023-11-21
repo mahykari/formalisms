@@ -75,7 +75,7 @@ We use the notation $\Gamma, \phi$ to show $\Gamma \cup \{\phi\}$.
   Prove implication transitivity using Natural Deduction.
 \end{homework}
 
-\begin{example}
+\begin{example}\label{lecture_7:contrapositive}
   Show $(\phi \rightarrow \psi) \rightarrow 
   (\neg \psi \rightarrow \neg \phi)$.
 \end{example}
@@ -106,6 +106,71 @@ We use the notation $\Gamma, \phi$ to show $\Gamma \cup \{\phi\}$.
     \qquad 
   \]
 \end{proof}
+
+Observe how this method of writing proofs in Natural Deduction
+requires us to rewrite the context for every step. We can use a
+slightly different notation to avoid this repetition.
+
+We can draw boxes to introduce \emph{contexts} in a proof. Every
+formula written inside a box is assumed to hold only within that box.
+The following ``proofs'' are examples of using this notation.
+
+\[ \infer {
+  \begin{tikzpicture}
+    \node [draw, rectangle, dashed, line cap=round]
+    {\begin{tabular}{c} $\phi$ \\ \vdots \\ $\psi$ \end{tabular}};
+  \end{tikzpicture}
+  }{\phi \rightarrow \psi}
+  \qquad \infer {
+  \begin{tikzpicture}
+    \node [draw, rectangle, dashed, line cap=round]
+    {\begin{tabular}{c} $\phi$ \\ \vdots \\ $\bot$ \end{tabular}};
+  \end{tikzpicture}
+  }{\neg \phi}
+  \qquad \infer {
+  \begin{tikzpicture}
+    \node {$\phi \lor \psi$};
+  \end{tikzpicture} \\
+  \begin{tikzpicture}
+    \node [draw, rectangle, dashed, line cap=round]
+    {\begin{tabular}{c} $\phi$ \\ \vdots \\ $\chi$ \end{tabular}};
+  \end{tikzpicture} \\
+  \begin{tikzpicture}
+    \node [draw, rectangle, dashed, line cap=round]
+    {\begin{tabular}{c} $\phi$ \\ \vdots \\ $\chi$ \end{tabular}};
+  \end{tikzpicture}
+  }{\chi}
+\]
+
+Using this notation, we can rewrite the proof for example
+\ref{lecture_7:contrapositive}:
+\[ \infer {
+  \begin{tikzpicture}
+    \node [draw, rectangle, dashed, line cap=round] {$
+    \infer {
+      \text{1. } \phi \rightarrow \psi \\\\
+      \begin{tikzpicture}
+        \node [draw, rectangle, dashed, line cap=round] {$
+        \infer {
+          \text{2. } \neg \psi \\\\
+          \begin{tikzpicture}
+            \node [draw, rectangle, dashed, line cap=round] {
+            \begin{tabular}{c}
+              3. $\phi$ \\
+              4. $\psi$ ($\rightarrow$-elim, 1, 3) \\
+              5. $\bot$ ($\neg$-elim, 2, 4)
+            \end{tabular}
+            };
+          \end{tikzpicture}
+        }{\neg \phi}
+        $};
+      \end{tikzpicture}
+    }{\neg \psi \rightarrow \neg \phi}
+    $};
+  \end{tikzpicture}
+  }{(\phi \rightarrow \psi)
+    \rightarrow (\neg \psi \rightarrow \neg \phi)}
+\]
 
 The system defined above is in fact the NJ (Intuitionistic Natural 
 Deduction) system. The NK system (Classical Natural Deduction) is NJ,
