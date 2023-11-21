@@ -1,5 +1,7 @@
 {{ % Localize command definitions
 
+\newcommand{\Rationals}{\mathbb{Q}}
+
 \chapter{Class 7}
 
 For this chapter, we replace the word \emph{formula} in rules and 
@@ -180,5 +182,33 @@ with the addition of the excluded-middle axiom:
 \]
 
 The NK system is sound and complete for propositional logic.
+
+Assumption of the law of excluded middle is in fact an important
+distinction between Intuitionistic and classical logic. In the
+following is an example which uses excluded middle in its proof.
+
+\begin{example}
+  Show that there exist $a, b \not \in \Rationals$ such that
+  $a ^ b \in \Rationals$.
+\end{example}
+\begin{proof}
+  Let $a = \sqrt{2} ^ {\sqrt{2}}$ and $b = \sqrt{2}$. We know that
+  $\sqrt{2} \not \in \Rationals$. We do a ``classical''
+  case-splitting on $a \in \Rationals$:
+  \begin{enumerate}
+    \item $a \not \in \Rationals$. We have
+    \[ a ^ b
+      = \left( \sqrt{2} ^ {\sqrt{2}} \right) ^ {\sqrt{2}}
+      = \sqrt{2} ^ 2
+      = 2 \in \Rationals \]
+  \item $a \in \Rationals$. We are already done with the proof; let
+  $a_1 = b_1 = \sqrt{2}$. We know $a_1, b_1 \not \in \Rationals$ and,
+  by assumption, ${a_1} ^ {b_1} \in \Rationals$.
+  \end{enumerate}
+
+  Observe how this classical-style proof utilizes the law of excluded
+  middle in the case-splitting: $\sqrt{2} ^ {\sqrt{2}}$ is either in
+  $\Rationals$ or not in $\Rationals$; there is no \emph{middle}.
+\end{proof}
 
 }} % End localization of command definitions
