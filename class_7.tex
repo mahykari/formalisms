@@ -1,6 +1,7 @@
 {{ % Localize command definitions
 
 \newcommand{\Rationals}{\mathbb{Q}}
+\newcommand{\Booleans}{\mathbb{B}}
 
 \chapter{Class 7}
 
@@ -175,13 +176,15 @@ Using this notation, we can rewrite the proof for example
 \]
 
 The system defined above is in fact the NJ (Intuitionistic Natural 
-Deduction) system. The NK system (Classical Natural Deduction) is NJ,
-with the addition of the excluded-middle axiom:
+Deduction) system. The following rule, namely the law of excluded
+middle, cannot be derived in NJ:
 \[ \infer* [right=ex-middle]
   { }{\Gamma \vdash \phi \lor \neg \phi}
 \]
 
-The NK system is sound and complete for propositional logic.
+The NK system (Classical Natural Deduction) is NJ with the addition
+of the law of excluded middle. The NK system is sound and complete
+for propositional logic.
 
 Assumption of the law of excluded middle is in fact an important
 distinction between Intuitionistic and classical logic. In the
@@ -210,5 +213,62 @@ following is an example which uses excluded middle in its proof.
   middle in the case-splitting: $\sqrt{2} ^ {\sqrt{2}}$ is either in
   $\Rationals$ or not in $\Rationals$; there is no \emph{middle}.
 \end{proof}
+
+\section{Kripke Semantics}
+
+Classically, an interpretation $v: P \to \Booleans$ is defined as a
+mapping from a set of propositions to boolean values $\top$ and
+$\bot$. For intuitionistic reasoning, we define a new semantics.
+
+\begin{definition}
+  A Kripke model $m$ is defined as a tuple $(W, \leq, w_0,
+  v: W \times P \to \Booleans)$, where $W$ is a set of classical
+  worlds, $\leq$ is a pre-order relation on $W$, $w_0$ is the initial
+  world, and $v$ is a function from pairs of world and proposition
+  to boolean values such that for any $w, w' \in W$ and any
+  $p \in P$, if $w \leq w'$, then $v(w, p) \leq v(w', p)$.
+\end{definition}
+
+Informally, a Kripke model is an interpretation model for
+intuitionistic proof systems. The following facts hold for any Kripke
+model $m$:
+\begin{enumerate}
+  \item $m \models \phi$ iff $m \vdash_{w_0} \phi$.
+  \item $m \not \models_w \bot$ for any world $w$.
+  \item $m \models_w p$ iff $v(w, p) = \top$.
+  \item $m \models_w \phi \rightarrow \psi$ iff for any $w'$, if
+  $w \leq w'$ and $m \models_{w'} \phi$, then $m \models_{w'} \psi$.
+\end{enumerate}
+
+In NJ, whenever you show $\phi \lor \psi$, you need to show either
+$\phi$, or $\psi$. As previously stated, the law of excluded middle
+cannot be derived in NJ. To show this, we need to show that there
+exists a Kripke model $m$ such that excluded middle is false in a
+world $w$ of $m$.
+
+Let us define a Kripke model with only one proposition $p$ and only
+two worlds $w_0$ and $w_1$, where $w_0 \leq w_1$, and $p$ is false in
+$w_0$ and true in $w_1$.
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (w0) at (0, 0) [draw, circle] {$\neg p$};
+    \node (w1) at (2, 0) [draw, circle] {$p$};
+    \node at (0, .75) {$w_0$};
+    \node at (2, .75) {$w_1$};
+    \draw[->] (w0) -- (w1);
+  \end{tikzpicture}
+\end{center}
+
+Let us examine what formulas are true (or false) in each world. By
+definition, $p$ is false in $w_0$. Let us examine the value of
+$\neg p$ in $w_0$. We can safely substitute $\neg p$ with $p
+\rightarrow \bot$. By definition, $p \rightarrow \bot$ holds in
+$w_0$ iff for any world $w$, if $w_0 \leq w$ and $p$ is true in $w$,
+then $\bot$ is true in $w$. We know $p$ is true in $w_1$. We also
+know that $\bot$ is not true in $w_1$, as it is not true in any world.
+So, by definition, $p \rightarrow \bot$ is false in $w_0$. So, both
+$p$ and $\neg p$ are false in $w_0$, from which we obtain that $p
+\lor \neg p$ is also false in $w_0$.
 
 }} % End localization of command definitions
