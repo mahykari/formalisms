@@ -11,7 +11,7 @@ proofs of a formal system by the word \emph{judgement}.
 \section{Natural Deduction for Propositional Logic}
 
 Judgements in Natural Deduction have the form $\Gamma \vdash \phi$, 
-where $\Gamma$ is a set of formulas and $\varphi$ is a formula.
+where $\Gamma$ is a set of formulas and $\phi$ is a formula.
 Semantically, for all interpretations $v$, if all formulas in 
 $\Gamma$ are true in $v$, then $\phi$ is true in $v$.
 Formal system for natural deduction defines a meta-symbol 
@@ -36,7 +36,7 @@ We use the notation $\Gamma, \phi$ to show $\Gamma \cup \{\phi\}$.
     {\Gamma \vdash \bot}{\Gamma \vdash \phi}
   \]
 
-  \item And-elimination and -introduction
+  \item Conjunction elimination and introduction
   \[ \infer* [right=$\land$-elim]
     {\Gamma \vdash \phi \land \psi}{\Gamma \vdash \phi}
     \qquad\qquad \infer* [right=$\land$-elim]
@@ -46,7 +46,7 @@ We use the notation $\Gamma, \phi$ to show $\Gamma \cup \{\phi\}$.
     {\Gamma \vdash \phi \land \psi}
   \]
 
-  \item Or-elimination and -introduction
+  \item Disjunction elimination and introduction
   \[ \infer* [right=$\lor$-elim]
     {\Gamma \vdash \phi \lor \psi 
     \\ \Gamma, \phi \vdash \chi
@@ -57,14 +57,14 @@ We use the notation $\Gamma, \phi$ to show $\Gamma \cup \{\phi\}$.
     {\Gamma \vdash \phi}{\Gamma \vdash \psi \land \phi}
   \]
 
-  \item Negation-elimination and -introduction
+  \item Negation elimination and introduction
   \[ \infer* [right=$\neg$-elim]
     {\Gamma \vdash \phi \\ \Gamma \vdash \neg \phi}
     {\Gamma \vdash \bot}
     \qquad\qquad \infer* [right=$\neg$-intro]
     {\Gamma, \phi \vdash \bot}{\Gamma \vdash \neg \phi}
   \]
-  \item Implication-elimination and -introduction
+  \item Implication elimination and introduction
   \[ \infer* [right=$\rightarrow$-elim]
     {\Gamma \vdash \phi \\ \Gamma \vdash \phi \rightarrow \psi}
     {\Gamma \vdash \psi}
