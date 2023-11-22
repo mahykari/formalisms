@@ -271,4 +271,77 @@ So, by definition, $p \rightarrow \bot$ is false in $w_0$. So, both
 $p$ and $\neg p$ are false in $w_0$, from which we obtain that $p
 \lor \neg p$ is also false in $w_0$.
 
+\section{Sequent (Gentzen) Calculus and LK}
+
+Judgements in the LK proof system have the form $\Gamma \vdash
+\Delta$, where both $\Gamma$ and $\Delta$ are sets of formulas.
+Judgement $\Gamma \vdash \Delta$ should be read as ``the
+\emph{conjunction} of the formulas in $\Gamma$ implies the
+\emph{disjunction} of the formulas in $\Delta$''. Semantically, for
+a classical interpretation $v$, $v \models (\Gamma \vdash \Delta)$
+if and only if, if all formulas in $\Gamma$ are true under $v$, then
+some fomula in $\Delta$ is true under $v$.
+
+\subsection{Judgements in LK}
+
+Observe how every non-axiom judgement increases the number of logical
+connectives in the set of formulas.
+
+\begin{enumerate}
+  \item Axioms
+  \[ \infer* [right=ax]
+    { }{\Gamma, \phi \vdash \phi, \Delta}
+    \qquad\qquad \infer* [right=$\bot$-elim]
+    { }{\Gamma, \bot \vdash \Delta}
+    \qquad\qquad \infer* [right=$\top$-intro]
+    { }{\Gamma \vdash \top, \Delta}
+  \]
+  \item Conjunction
+  \[ \infer
+    {\Gamma, \phi, \psi \vdash \Delta}
+    {\Gamma, \phi \land \psi \vdash \Delta}
+    \qquad\qquad \infer
+    {\Gamma \vdash \phi, \Delta
+    \\ \Gamma \vdash \psi, \Delta}
+    {\Gamma \vdash \phi \land \psi, \Delta}
+  \]
+  \item Disjunction
+  \[ \infer
+    {\Gamma, \phi \vdash \Delta
+    \\ \Gamma, \psi \vdash \Delta}
+    {\Gamma, \phi \lor \psi \vdash \Delta}
+    \qquad\qquad \infer
+    {\Gamma \vdash \phi, \psi, \Delta}
+    {\Gamma \vdash \phi \lor \psi, \Delta}
+  \]
+  \item Negation
+  \[ \infer
+    {\Gamma, \phi \vdash \Delta}
+    {\Gamma \vdash \neg \phi, \Delta}
+    \qquad\qquad \infer
+    {\Gamma \vdash \phi, \Delta}
+    {\Gamma, \neg \phi \vdash \Delta}
+  \]
+  \item Implication
+  \[ \infer
+    {\Gamma, \phi \vdash \psi, \Delta}
+    {\Gamma \vdash \phi \rightarrow \psi, \Delta}
+    \qquad\qquad \infer
+    {\Gamma \vdash \phi, \Delta
+    \\ \Gamma, \psi \vdash \Delta}
+    {\Gamma, \phi \rightarrow \psi \vdash \Delta}
+  \]
+\end{enumerate}
+
+The LK proof system is sound and complete for propositional logic.
+This actually means that excluded middle can be derived in LK.
+
+\begin{homework}
+  Prove the following in LK:
+  \begin{enumerate}
+    \item The law of excluded middle: $ \vdash p \lor \neg p$,
+    \item Implication transitivity.
+  \end{enumerate}
+\end{homework}
+
 }} % End localization of command definitions
